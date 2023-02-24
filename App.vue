@@ -10,7 +10,15 @@
                         </div>
                     </div>
                     <!--Main content-->
+                    <main class="col-span-12 md:col-span-8 xl:col-span-6">
+
+                    </main>
                     <!--right sidebar-->
+                    <div class="md:block xs-col-sapn-1 xl:col-span-3">
+                        <div class="sticky top-0">
+                            <MoreSideBar />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

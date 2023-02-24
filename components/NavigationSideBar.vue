@@ -80,5 +80,5 @@
 <script setup lang="ts">
 import { HomeIcon } from '@heroicons/vue/24/solid';
 import { HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UserIcon, EllipsisHorizontalCircleIcon } from '@heroicons/vue/24/outline'
-const { defaultTransition } = useTailwindDefaluts()
+const { defaultTransition } = useTailwindDefaults()
 </script>

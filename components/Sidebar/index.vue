@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-const { defaultTransition } = useTailwindDefaluts();
+const { defaultTransition } = useTailwindDefaults();
 
 const props = defineProps({
     active: {
