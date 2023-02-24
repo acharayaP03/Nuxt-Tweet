@@ -9,9 +9,12 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.4.1",
-    "nuxt": "^3.2.2"
+    "nuxt": "^3.2.2",
+    "prisma": "^4.10.1"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.0.16"
+    "@heroicons/vue": "^2.0.16",
+    "@prisma/client": "4.10.1",
+    "bcrypt": "^5.1.0"
   }
 }
