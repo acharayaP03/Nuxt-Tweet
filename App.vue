@@ -1,10 +1,23 @@
 <template>
-    <div :class="{'dark': darkMode}">
-      <h1 class="text-red-500 dark:text-dim-600">Twitter clone</h1>
+    <div :class="{ 'dark': darkMode }">
+        <div class="bg-white dark:bg-dim-900">
+            <div class="min-h-full">
+                <div class="grid grid-cols-12 mx-auto sm:px-6 lg:mx-w-7xl lg:px-8 lg:gap-5">
+                    <!--Left sidebar-->
+                    <div class="md:block xs-col-sapn-1 xl:col-span-2">
+                        <div class="sticky top-0">
+                            <NavigationSideBar />
+                        </div>
+                    </div>
+                    <!--Main content-->
+                    <!--right sidebar-->
+                </div>
+            </div>
+        </div>
     </div>
-  </template>
-  <script setup lang="ts">
-  const title = ref('');
-  const darkMode = ref(true)
+</template>
+<script setup lang="ts">
+const title = ref('');
+const darkMode = ref(false)
 
-  </script>
+</script>
