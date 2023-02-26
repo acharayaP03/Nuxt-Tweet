@@ -41,12 +41,18 @@ export default defineEventHandler(async (event) =>{
      */
 
     const { accessToken, refreshToken } = generateTokens(user)
+    /**
+     * @createRefreshToken will save a refreshtoken on the database with logged in user id.
+     */
     await createRefreshToken({
         token: refreshToken,
         userId: user.id
     })
 
-    // http cookie only: only server will use this
+    /**
+     * http cookie only: only server will use this
+     * this will be automatically saved inside the cookie.
+     */
     sendRefreshToken(event, refreshToken);
     
     return{

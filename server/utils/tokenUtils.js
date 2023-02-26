@@ -1,5 +1,10 @@
 import jwt from 'jsonwebtoken';
 
+/**
+ * 
+ * @param {*} user  
+ * @returns we will generate jwt access token based on user that is currently logged in
+ */
 const generateAccessToken = (user) => {
     const config = useRuntimeConfig();
 
@@ -18,6 +23,11 @@ export const decodeAccessToken = (token) =>{
     }
 }
 
+/**
+ * 
+ * @param {*} user  
+ * @returns refresh token which will be saved in a cookie which only server can have access to it via http only
+ */
 const generateRefreshToken = (user) => {
     const config = useRuntimeConfig();
 
@@ -34,7 +44,12 @@ export const generateTokens = (user) => {
         refreshToken
     }
 }
-
+/**
+ * 
+ * @param {*} response response object that contains refresh token
+ * @param {*} token refresh token key 
+ * @options any options, in this case we have @httpOnly and @sameSite which are ture 
+ */
 export const sendRefreshToken = (response, token) => {
    
     setCookie(response, "refresh_token", token, {

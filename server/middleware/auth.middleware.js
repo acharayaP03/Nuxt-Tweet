@@ -14,16 +14,18 @@ export default defineEventHandler( async (event) =>{
     const endpoints = [
         '/api/auth/user'
     ];
-
     // return true or flase if url matches
     const handleMatchUrl = endpoints.some( endpoint => {
         const pattern = new UrlPattern(endpoint);
         return pattern.match(event.node.req.url)
     })
 
-    if(!handleMatchUrl) return;
-    const token = event.node.req.headers.authorization?.split(' ').at(1);
+    console.log(handleMatchUrl);
 
+    if(!handleMatchUrl) return;
+    // event.node.req.headers.authorization?.split(' ').at(1);
+    const token = event.node.req
+    console.log(handleMatchUrl, token);
     /**
      * retrieve access token when user signs in, 
      @decodeAccessToken is a util functions 
