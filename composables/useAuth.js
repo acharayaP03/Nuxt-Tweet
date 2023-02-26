@@ -1,3 +1,13 @@
+/**
+ * @useState local state where we will preserve our token.
+ * @return 
+ * @setToken
+ * @setUser
+ * @login 
+ * @getUser
+ * @initAuth
+ */
+
 export default () => {
     const useAuthToken = () => useState('auth_token');
     const useAuthUser = () => useState('auth_user');
@@ -39,6 +49,19 @@ export default () => {
             try {
                 const data = $fetch('/api/auth/refresh')
                 setToken(data.access_token)
+
+                resolve(true)
+            } catch (error) {
+                reject(error);
+            }
+        })
+    }
+
+    const getUser = () =>{
+        return new Promise( async (resolve, reject) =>{
+            try {
+                const data = useFetchApi('/api/auth/user')
+                setUser(data.user)
 
                 resolve(true)
             } catch (error) {

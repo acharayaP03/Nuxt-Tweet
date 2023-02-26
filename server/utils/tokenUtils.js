@@ -8,6 +8,16 @@ const generateAccessToken = (user) => {
     })
 }
 
+export const decodeAccessToken = (token) =>{
+    const config = useRuntimeConfig();
+
+    try {
+        return jwt.verify(token, config.accessToken)
+    } catch (error) {
+        return null
+    }
+}
+
 const generateRefreshToken = (user) => {
     const config = useRuntimeConfig();
 
