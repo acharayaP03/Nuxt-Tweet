@@ -1,17 +1,19 @@
 /**
  * @useState local state where we will preserve our token.
  * @return 
- * @setToken
- * @setUser
+ * @setToken helper method to save access token
+ * @setUser helper method to save user
+ * @setLoading helper method to set loading state
  * @login 
  * @getUser
+ * @refreshToken fetch refresh token inorder to save it to cookie
  * @initAuth
  */
 
 export default () => {
     const useAuthToken = () => useState('auth_token');
     const useAuthUser = () => useState('auth_user');
-    const useAuthLoading = () => useState(() => true)
+    const useAuthLoading = () => useState('auth_loading',  () => true)
 
     const setToken = (newToken) => {
         const authToken = useAuthToken();
@@ -76,6 +78,10 @@ export default () => {
         })
     }
 
+    /**
+     * this function will prevent user from loging in every time they refresh page.
+     * @returns resolve promise
+     */
     const initAuth = () => {
         return new Promise( async (resolve, reject) =>{
             setLoading(true)
@@ -91,6 +97,8 @@ export default () => {
             }
         })
     }
+
+
     return {
         login,
         useAuthToken,
