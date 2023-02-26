@@ -23,3 +23,11 @@ export const createUser = (userData) =>{
         },
     })
  }
+
+ export const getUserById = (id) =>{
+    return prisma.user.findUnique({
+        where:{
+            id
+        }
+    })
+ }
