@@ -31,8 +31,12 @@
 </template>
 <script setup lang="ts">
 const darkMode = ref(false);
-const { useAuthUser } = useAuth();
+const { useAuthUser, initAuth } = useAuth();
 
-const user = useAuthUser()
+const user = useAuthUser();
+
+onBeforeMount(() =>{
+    initAuth()
+})
 
 </script>
