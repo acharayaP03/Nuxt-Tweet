@@ -1,7 +1,7 @@
 <template>
     <div :class="{ 'dark': darkMode }">
         <div class="bg-white dark:bg-dim-900">
-            <div class="min-h-full">
+            <div v-if="false" class="min-h-full">
                 <div class="grid grid-cols-12 mx-auto sm:px-6 lg:mx-w-7xl lg:px-8 lg:gap-5">
                     <!--Left sidebar-->
                     <div class="md:block xs-col-sapn-1 xl:col-span-2">
@@ -21,6 +21,11 @@
                     </div>
                 </div>
             </div>
+
+            <!--Login page-->
+            <AuthPage v-else>
+
+            </AuthPage>
         </div>
     </div>
 </template>
