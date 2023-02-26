@@ -11,6 +11,7 @@
 export default () => {
     const useAuthToken = () => useState('auth_token');
     const useAuthUser = () => useState('auth_user');
+    const useAuthLoading = () => useState(() => true)
 
     const setToken = (newToken) => {
         const authToken = useAuthToken();
@@ -20,6 +21,11 @@ export default () => {
     const setUser = (newUser) => {
         const authUser = useAuthUser();
         authUser.value = newUser;
+    }
+
+    const setLoading = (value) => {
+        const loading = useAuthLoading();
+        loading.value = value;
     }
 
 
@@ -72,12 +78,16 @@ export default () => {
 
     const initAuth = () => {
         return new Promise( async (resolve, reject) =>{
+            setLoading(true)
             try {
                 await refreshToken();
+                await getUser()
 
                 resolve(true)
             } catch (error) {
                 reject(error)
+            }finally {
+                setLoading(false)
             }
         })
     }
@@ -85,6 +95,7 @@ export default () => {
         login,
         useAuthToken,
         useAuthUser,
-        initAuth
+        initAuth,
+        useAuthLoading
     }
 }
