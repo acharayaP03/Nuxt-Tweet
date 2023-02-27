@@ -10,6 +10,8 @@
  * @initAuth
  */
 
+ import jwt_decode from 'jwt-decode'
+
 export default () => {
     const useAuthToken = () => useState('auth_token');
     const useAuthUser = () => useState('auth_user');
@@ -63,6 +65,25 @@ export default () => {
                 reject(error);
             }
         })
+    }
+
+    /**
+     * refresh access token if and when expired
+     */
+    const reRefreshAccessToken = () =>{
+        const authToken = useAuthToken();
+
+        if(!authToken.value){
+            return;
+        }
+
+        const jwt = jwt_decode(authToken.value);
+        const newRefreshTime = jwt.exp - 60000;
+
+        setTimeout(() => {
+            refreshToken();
+            reRefreshAccessToken();
+        }, newRefreshTime)
     }
 
     const getUser = () =>{
