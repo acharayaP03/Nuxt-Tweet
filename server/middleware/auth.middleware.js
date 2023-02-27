@@ -12,7 +12,8 @@ const UrlPattern = require('url-pattern')
 export default defineEventHandler( async (event) =>{
 
     const endpoints = [
-        '/api/auth/user'
+        '/api/auth/user',
+        '/api/user/tweets'
     ];
 
     // return true or flase if url matches
@@ -30,6 +31,7 @@ export default defineEventHandler( async (event) =>{
      @decodeAccessToken is a util functions 
      */
     const decoded = decodeAccessToken(token);
+
     if(!decoded){
         return sendError(event, createError({
             statusCode: 401,
