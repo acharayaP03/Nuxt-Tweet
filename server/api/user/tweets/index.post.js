@@ -2,6 +2,8 @@
 import formidable from 'formidable';
 import { createTweet } from '~~/server/db/tweets';
 import {tweetTransformers} from '~~/server/transformers/tweet';
+import { createMediaFile } from '~~/server/db/mediaFiles';
+
 export default defineEventHandler (async (event) =>{
 
     // in order to get multipart form data, we will use package called formidable.
@@ -27,7 +29,19 @@ export default defineEventHandler (async (event) =>{
     // create a tweet method that creates a tweet inside the db.
     const tweet = await createTweet(tweetData);
 
+    const filePromises = Object.keys(files).map(async key => {
+        return createMediaFile({
+            url: '',
+            providerPublicId: 'random_id',
+            userId: userId,
+            tweetId: tweet.id
+        })
+    })
+
+    await Promise.all(filePromises)
+
     return {
-        tweet: tweetTransformers(tweetData)
+        // tweet: tweetTransformers(tweetData)
+        files
     }
 })
