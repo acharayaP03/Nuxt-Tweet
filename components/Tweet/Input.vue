@@ -10,10 +10,14 @@
                     v-model="text"
                 ></textarea>
             </div>
-
         </div>
-        <div class="flex p-2 pl-14">
-            <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-50 dark:hover:bg-dim-800">
+        <!--File uploader-->
+        <div class="p-4 pl-16">
+            <input type="file" ref="imageUploader" hidden accept="image/png, image/gif image/jpeg" @change="handleImageChange">
+        </div>
+        <!--Icon -->
+        <div class="flex p-2 pl-14"> 
+            <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-50 dark:hover:bg-dim-800" @click="handleImageClick">
                 <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
                     <g>
                         <path
@@ -83,13 +87,26 @@
 </template>
 
 <script setup>
+const imageUploader = ref();
+const selectedFile = ref('')
 const text = ref('')
 const user = inject('user');
 const emits = defineEmits(['onSubmit'])
 
 const handleTweet = () =>{
     emits('onSubmit', {
-        text: text.value
+        text: text.value,
+        mediaFiles: [selectedFile.value]
     })
+}
+
+const handleImageClick = () =>{
+    imageUploader.value.click()
+}
+
+const handleImageChange = (event) => {
+
+    const file = event.target.files[0]
+    selectedFile.value = file
 }
 </script>
