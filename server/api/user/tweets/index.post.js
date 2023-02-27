@@ -30,9 +30,13 @@ export default defineEventHandler (async (event) =>{
     const tweet = await createTweet(tweetData);
 
     const filePromises = Object.keys(files).map(async key => {
+        const file = files[key];
+
+        const cloudinaryResource = await uploadToCloudinary(file.filepath);
+        console.log(cloudinaryResource);
         return createMediaFile({
-            url: '',
-            providerPublicId: 'random_id',
+            url: cloudinaryResource.secure_url,
+            providerPublicId: cloudinaryResource.public_id,
             userId: userId,
             tweetId: tweet.id
         })
@@ -41,7 +45,7 @@ export default defineEventHandler (async (event) =>{
     await Promise.all(filePromises)
 
     return {
-        // tweet: tweetTransformers(tweetData)
+        tweet: tweetTransformers(tweetData),
         files
     }
 })
