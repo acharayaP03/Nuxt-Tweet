@@ -13,7 +13,8 @@ export default defineEventHandler( async (event) =>{
 
     const endpoints = [
         '/api/auth/user',
-        '/api/user/tweets'
+        '/api/user/tweets',
+        '/api/tweets'
     ];
 
     // return true or flase if url matches
