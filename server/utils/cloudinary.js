@@ -1,18 +1,26 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { v2 as _cloudinary } from 'cloudinary';
 
+const cloudinary = () => {
+    const config = useRuntimeConfig();
+    // cloudinary credentials
+    _cloudinary.config({
+        cloud_name: config.cloudinaryCloudName,
+        api_key: config.cloudinaryApiKey,
+        api_secret: config.cloudinaryApiSecret,
+        secure: true
+    });
 
-export const uploadToCloudinary = () => {
+    return _cloudinary
+}
+/**
+ * 
+ * @returns images or media files
+ */
+
+export const uploadToCloudinary = (images) => {
     return new Promise((resolve, reject) =>{
-        const config = useRuntimeConfig();
-        // cloudinary credentials
-        cloudinary.config({
-            cloud_name: config.CLOUDINARY_CLOUD_NAME,
-            api_key: config.CLOUDINARY_API_KEY,
-            api_secret: config.CLOUDINARY_API_SECRET
-        });
-
         //process media files 
-        cloudinary.uploader.upload(image, (error, data) => {
+        cloudinary().uploader.upload(images, (error, data) => {
             if(error) reject(error);
 
             resolve(data)
