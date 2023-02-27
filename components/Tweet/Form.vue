@@ -5,6 +5,8 @@
 </template>
 
 <script setup>
+import useTweets from '../../composables/useTweets'
+
 const { postTweet } = useTweets();
 // data comes from child component emitter ..
 const handleFormSubmit = async ({ text, mediaFiles }) => {
