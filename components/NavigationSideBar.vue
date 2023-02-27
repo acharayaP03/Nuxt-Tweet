@@ -74,11 +74,25 @@
                     More
                 </template>
             </Sidebar>
+            <div class='hidden xl:block'>
+                <UIButton liquid size='lg'>
+                    <span class='font-bold'>
+                        Tweet
+                    </span>
+                </UIButton>
+            </div>
+            <div class='block xl:hidden'>
+                <UIButton>
+                    <div class='w-6 h-6 font-bold'>
+                        <PencilIcon/>
+                    </div>
+                </UIButton>
+            </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { HomeIcon } from '@heroicons/vue/24/solid';
-import { HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UserIcon, EllipsisHorizontalCircleIcon } from '@heroicons/vue/24/outline'
+import { HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UserIcon, EllipsisHorizontalCircleIcon, PencilIcon } from '@heroicons/vue/24/outline'
 const { defaultTransition } = useTailwindDefaults()
 </script>

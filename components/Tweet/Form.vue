@@ -26,7 +26,7 @@ const handleFormSubmit = async ({ text, mediaFiles }) => {
     } catch (error) {
         console.log(error);
     } finally {
-        loading.value = flase
+        loading.value = false
     }
 }
 </script>
