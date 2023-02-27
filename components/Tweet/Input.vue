@@ -8,11 +8,13 @@
                 <textarea 
                     class="w-full h-12 text-lg text-gray-900 placeholder:text-gray-400 bg-transparent border-0 dark:text.white focus:ring-0"
                     v-model="text"
+                    placeholder="What's happening ?"
                 ></textarea>
             </div>
         </div>
         <!--File uploader-->
         <div class="p-4 pl-16">
+            <img :src='uploadImageUrl' v-if='uploadImageUrl' alt='' class='rounded-2xl border object-cover' :class='twitterBorderColor'>
             <input type="file" ref="imageUploader" hidden accept="image/png, image/gif image/jpeg" @change="handleImageChange">
         </div>
         <!--Icon -->
@@ -87,8 +89,12 @@
 </template>
 
 <script setup>
+import useTailwindDefaults from '../../composables/useTailwindDefaults'
+
+const { twitterBorderColor } = useTailwindDefaults()
 const imageUploader = ref();
 const selectedFile = ref('')
+const uploadImageUrl = ref(null);
 const text = ref('')
 const user = inject('user');
 const emits = defineEmits(['onSubmit'])
@@ -107,6 +113,12 @@ const handleImageClick = () =>{
 const handleImageChange = (event) => {
 
     const file = event.target.files[0]
-    selectedFile.value = file
+    selectedFile.value = file;
+
+    const fileReader = new FileReader();
+    fileReader.onload = event => {
+        uploadImageUrl.value = event.target.result
+    }
+    fileReader.readAsDataURL(file)
 }
 </script>
