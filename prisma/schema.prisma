@@ -1,5 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Once the model is create run npx prisma db push
+// this will create a db with model specified model name...
 
 generator client {
   provider = "prisma-client-js"
@@ -22,6 +24,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   refreshToken RefreshToken[]
+  tweet Tweet[]
 }
 
 model RefreshToken {
@@ -33,4 +36,21 @@ model RefreshToken {
 
   userId String @db.ObjectId
   user User @relation(fields: [userId], references: [id])
+}
+
+model Tweet {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  text String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Creator of tweet
+  author User @relation(fields: [authorId], references: [id])
+  authorId String @db.ObjectId
+
+  // reply to tweets
+  replyToId String? @db.ObjectId
+  replyTo Tweet? @relation("replies", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies Tweet[] @relation("replies")
 }
