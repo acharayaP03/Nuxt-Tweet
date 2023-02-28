@@ -7,13 +7,13 @@
             <TweetForm />
         </div>
 
-        <TweetListFeed :tweets='allTweets'/>
+        <TweetListFeed :tweets='[]'/>
 
     </MainSection>
 </template>
 
 <script setup lang="ts">
-
+import { TweetListFeed } from '#components';
 import { useAuth, useTailwindDefaults, useTweets } from '#imports'
 
 const { getAllTweets } = useTweets();
