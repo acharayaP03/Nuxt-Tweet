@@ -1,7 +1,7 @@
 
 import formidable from 'formidable';
 import { createTweet } from '~~/server/db/tweets';
-import {tweetTransformers} from '~~/server/transformers/tweet';
+import {tweetTransformers} from '~/server/transformers/tweet';
 import { createMediaFile } from '~~/server/db/mediaFiles';
 
 export default defineEventHandler (async (event) =>{
@@ -24,6 +24,12 @@ export default defineEventHandler (async (event) =>{
     const tweetData = {
         text: fields.text,
         authorId: userId
+    }
+
+    // check if there is any reply to the tweet.
+    const replyTo = fields.replyTo;
+    if(replyTo && replyTo !== null){
+        tweetData.replyToId = replyTo;
     }
 
     // create a tweet method that creates a tweet inside the db.
