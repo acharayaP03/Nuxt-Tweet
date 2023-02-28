@@ -5,9 +5,7 @@
                 <Title></Title>
             </Head>
 
-            <p>
-                {{ tweet }}
-            </p>
+            <TweetDetails :tweet='tweet' :user='user'/>
         </MainSection>
     </div>
 </template>
@@ -15,9 +13,13 @@
 <script setup>
 import useTweets from '../../composables/useTweets'
 import { useRoute } from 'vue-router'
+import useAuth from '../../composables/useAuth'
 const { useGetTweetById } = useTweets()
 const loading = ref(false);
-const tweet = ref(null)
+const tweet = ref(null);
+const { useAuthUser } = useAuth();
+
+const user = useAuthUser()
 //get id from route params
 const id = useRoute().params.id;
 

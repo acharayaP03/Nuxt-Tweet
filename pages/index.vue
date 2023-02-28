@@ -4,7 +4,7 @@
             <Title>Home / Twitter</Title>
         </Head>
         <div class='border-b' :class='twitterBorderColor'>
-            <TweetForm />
+            <TweetForm :user='user'/>
         </div>
 
         <TweetListFeed :tweets='allTweets'/>
@@ -25,7 +25,7 @@ const { useAuthUser } = useAuth();
 const allTweets = ref([])
 
 const user = useAuthUser()
-provide('user', user)
+// provide('user', user)
 
 onBeforeMount(async () => {
     loading.value = true;
