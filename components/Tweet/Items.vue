@@ -30,10 +30,47 @@
                 <img :src='image.url' alt='uploaded image' class='w-full object-cover rounded-2xl'>
             </div>
         </div>
+        <!--Actions buttons-->
+        <div class='mt-2 flex items-center justify-around w-full'>
+            <TweetActions color='blue'>
+                <template v-slot:icon='{ classes }'>
+                    <ChatBubbleBottomCenterIcon :class='classes'/>
+                </template>
+                <template #default>
+                    {{ props.tweet.repliesCount }}
+                </template>
+            </TweetActions>
+            <TweetActions color='green'>
+                <template v-slot:icon='{ classes }'>
+                    <ArrowPathIcon :class='classes'/>
+                </template>
+                <template #default>
+                    {{ generateRandomNumber() }}
+                </template>
+            </TweetActions>
+            <TweetActions color='red'>
+                <template v-slot:icon='{ classes }'>
+                    <HeartIcon :class='classes'/>
+                </template>
+                <template #default>
+                    {{ generateRandomNumber() }}
+                </template>
+            </TweetActions>
+            <TweetActions color='blue'>
+                <template v-slot:icon='{ classes }'>
+                    <ArrowUpTrayIcon :class='classes'/>
+                </template>
+                <template #default>
+                    {{ generateRandomNumber() }}
+                </template>
+            </TweetActions>
+        </div>
     </div>
 </template>
 
 <script setup lang='ts'>
+import { TweetActions } from '#components'
+import  { ChatBubbleBottomCenterIcon,ArrowPathIcon, HeartIcon, ArrowUpTrayIcon } from '@heroicons/vue/24/outline';
 import { PropType } from '@vue/runtime-core'
 import { computed } from '#imports'
 
@@ -46,4 +83,7 @@ const props = defineProps({
 })
 
 const replyToTweetUrl = computed(() => `/status/${props.tweet.replyTo.author.handle}`)
+const generateRandomNumber = () => {
+    return Math.floor(Math.random() * 100);
+}
 </script>
