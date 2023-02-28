@@ -7,7 +7,7 @@
             <TweetForm />
         </div>
 
-        <TweetListFeed :tweets='[]'/>
+        <TweetListFeed :tweets='allTweets'/>
 
     </MainSection>
 </template>
