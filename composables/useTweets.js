@@ -1,3 +1,5 @@
+import useFetchApi from '~/composables/useFetchApi'
+
 export default () =>{
     const postTweet = (formData) =>{
         const form = new FormData();
@@ -14,7 +16,25 @@ export default () =>{
         })
     }
 
+    /**
+     * @get tweets
+     */
+
+    const getAllTweets = () => {
+        return new Promise(async (resolve, reject) =>{
+            try{
+                const tweets = await useFetchApi('/api/tweets', {
+                    method: 'GET'
+                });
+                console.log('UseTweets: ',tweets)
+                resolve(tweets);
+            } catch (error){
+                reject(error)
+            }
+        })
+    }
     return {
-        postTweet
+        postTweet,
+        getAllTweets
     }
 }
