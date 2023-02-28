@@ -4,31 +4,36 @@
             <Head>
                 <Title></Title>
             </Head>
+
+            <p>
+                {{ tweet }}
+            </p>
         </MainSection>
     </div>
 </template>
 
 <script setup>
-
+import useTweets from '../../composables/useTweets'
+import { useRoute } from 'vue-router'
+const { useGetTweetById } = useTweets()
 const loading = ref(false);
-
+const tweet = ref(null)
 //get id from route params
-function getTweetIdFromRoute() {
-    return useRoute().params.id;
+const id = useRoute().params.id;
+
+async function getTweets () {
+    loading.value = true;
+
+    try{
+        const response = await useGetTweetById(id);
+
+        tweet.value  = response
+    }catch(error){
+        console.log(error);
+    } finally {
+        loading.value = false
+    }
 }
 
-// async function getTweets () {
-//     loading.value = true;
-//     try{
-//         const response = await getTweetById(getTweetIdFromRoute());
-//
-//         console.log(response)
-//     }catch(error){
-//         console.log(error);
-//     } finally {
-//         loading.value = false
-//     }
-// }
-
-
+getTweets();
 </script>
