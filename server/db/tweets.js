@@ -16,3 +16,21 @@ export const getTweets = (params) => {
         ...params
     })
 }
+
+
+/**
+ * @getTweetById find tweet by id,
+ * @params is and extra informatin that we need to pass in order to retrieve more info on tweet,
+ * inorder to safely perform this function, we need to pass ...params.where, so that 'where' is not overrided.
+ */
+
+export const getTweetById = (id, params = {}) =>{
+    return prisma.tweet.findUnique({
+        ...params,
+        where: {
+            ...params.where,
+            id
+        },
+
+    })
+}
