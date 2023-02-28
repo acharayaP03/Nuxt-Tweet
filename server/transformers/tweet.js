@@ -11,7 +11,7 @@ export const tweetTransformers = (tweet)=> {
         author: !!tweet.author ? userTransformers(tweet.author) : null,
         medaiFiles: !!tweet.medaiFiles ? tweet.medaiFiles.map(mediaFilesTransformer) : [],
         replies: !!tweet.replies ? tweet.replies.map(tweetTransformers): [],
-        replTo: !!tweet.replTo ? tweetTransformers(tweet.replTo) : null,
+        replyTo: !!tweet.replyTo ? tweetTransformers(tweet.replyTo) : null,
         repliesCount: !!tweet.replies ? tweet.replies.length : 0,
         postedAtHuman: human(tweet.createdAt)
     }
