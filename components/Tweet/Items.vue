@@ -13,11 +13,11 @@
                     . {{ tweet.postedAtHuman}}
                 </span>
 
-                <p v-if='tweet.replyTo'>
+                <p v-if='tweet.replyTo !== null'>
                     <span class='text-gray-500'>
                         Replying to
                     </span>
-                    <NuxtLink :to='`/status/${props.tweet.replyTo.author.id}`' class='text-blue-500'>{{ tweet.replyTo.author.handle }}</NuxtLink>
+                    <NuxtLink :to='`/status/${props.tweet.replyTo.id}`' class='text-blue-500'>{{ tweet.replyTo.author.handle }}</NuxtLink>
                 </p>
             </div>
         </div>
