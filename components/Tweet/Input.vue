@@ -103,12 +103,19 @@
 <script setup>
 import useTailwindDefaults from '../../composables/useTailwindDefaults'
 
+const props = defineProps({
+    user: {
+        type: Object,
+        required: true
+    }
+})
+
 const { twitterBorderColor } = useTailwindDefaults()
 const imageUploader = ref();
 const selectedFile = ref('')
 const uploadImageUrl = ref(null);
 const text = ref('')
-const user = inject('user');
+
 const emits = defineEmits(['onSubmit']);
 
 const isDisabled = computed(() => text.value === '')

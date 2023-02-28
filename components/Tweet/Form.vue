@@ -3,7 +3,7 @@
         <UISpinner />
     </div>
     <div v-else>
-       <TweetInput @onSubmit="handleFormSubmit"/>
+       <TweetInput @onSubmit="handleFormSubmit" :user='user'/>
     </div>
 </template>
 
@@ -12,6 +12,13 @@ import useTweets from '../../composables/useTweets'
 
 const { postTweet } = useTweets();
 const loading = ref(false)
+
+const props = defineProps({
+    user: {
+        type: Object,
+        required: true
+    }
+})
 // data comes from child component emitter ..
 const handleFormSubmit = async ({ text, mediaFiles }) => {
     loading.value = true;
